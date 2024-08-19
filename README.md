@@ -1,86 +1,86 @@
 
-# Product Hunt 每日中文热榜
+# Product Hunt 매일 한국어 인기 목록
 
-[English](README.en.md) | [中文](README.md)
+[English](README.en.md) | [한국어](README.md)
 
 ![License](https://img.shields.io/github/license/ViggoZ/producthunt-daily-hot) ![Python](https://img.shields.io/badge/python-3.x-blue)
 
-Product Hunt 每日热榜是一个基于 GitHub Action 的自动化工具，它能够每天定时生成 Product Hunt 上的热门产品榜单 Markdown 文件，并自动提交到 GitHub 仓库中。该项目旨在帮助用户快速查看每日的 Product Hunt 热门榜单，并提供更详细的产品信息。
+Product Hunt 매일 인기 목록은 GitHub Action을 기반으로 한 자동화 도구로, 매일 정해진 시간에 Product Hunt의 인기 제품 목록 Markdown 파일을 생성하고 자동으로 GitHub 리포지토리에 제출합니다. 이 프로젝트는 사용자가 매일 Product Hunt의 인기 목록을 빠르게 확인하고, 더 자세한 제품 정보를 제공하는 데 목적이 있습니다.
 
-榜单会在每天下午4点自动更新，可以在 [🌐 这里查看](https://decohack.com/category/producthunt/)。
+목록은 매일 오후 4시에 자동으로 업데이트되며, [🌐 여기에서 확인할 수 있습니다](https://decohack.com/category/producthunt/)。
 
-## 预览
+## 미리보기
 
 ![Preview](./preview.gif)
 
-## 功能概述
+## 기능 개요
 
-- **自动获取数据**：每天自动获取前一天的 Product Hunt Top 30 产品数据。
-- **关键词生成**：生成简洁易懂的中文关键词，帮助用户更好地理解产品内容。
-- **高质量翻译**：使用 OpenAI 的 GPT-4 模型对产品描述进行高质量翻译。
-- **Markdown 文件生成**：生成包含产品数据、关键词和翻译描述的 Markdown 文件，方便在网站或其他平台上发布。
-- **每日自动化**：通过 GitHub Actions 自动生成并提交每日的 Markdown 文件。
-- **可配置工作流**：支持手动触发或通过 GitHub Actions 定时生成内容。
-- **灵活定制**：脚本易于扩展或修改，可以包括额外的产品细节或调整文件格式。
+- **자동 데이터 수집**: 매일 전날의 Product Hunt Top 30 제품 데이터를 자동으로 수집합니다.
+- **키워드 생성**: 간결하고 이해하기 쉬운 한국어 키워드를 생성하여 사용자가 제품 내용을 더 잘 이해할 수 있도록 돕습니다.
+- **고품질 번역**: OpenAI의 GPT-4 모델을 사용하여 제품 설명을 고품질로 번역합니다.
+- **Markdown 파일 생성**: 제품 데이터, 키워드 및 번역된 설명을 포함한 Markdown 파일을 생성하여 웹사이트나 다른 플랫폼에 쉽게 게시할 수 있습니다.
+- **매일 자동화**: GitHub Actions를 통해 매일 Markdown 파일을 자동으로 생성하고 제출합니다.
+- **구성 가능한 워크플로우**: 수동으로 트리거하거나 GitHub Actions를 통해 정기적으로 콘텐츠를 생성할 수 있습니다.
+- **유연한 커스터마이징**: 스크립트를 쉽게 확장하거나 수정할 수 있으며, 추가 제품 세부 정보 포함이나 파일 형식 조정도 가능합니다.
 
-## 快速开始
+## 빠른 시작
 
-### 前置条件
+### 사전 준비
 
 - Python 3.x
-- GitHub 账户及仓库
-- OpenAI API Key
-- Product Hunt API 凭证
+- GitHub 계정 및 리포지토리
+- OpenAI API 키
+- Product Hunt API 인증 정보
 
-### 安装
+### 설치
 
-1. **克隆仓库：**
+1. **리포지토리 클론:**
 
 ```bash
 git clone https://github.com/ViggoZ/producthunt-daily-hot.git
 cd producthunt-daily-hot
 ```
 
-2. **安装 Python 依赖：**
+2. **Python 의존성 설치:**
 
-确保您的系统已安装 Python 3.x。然后安装所需的依赖包：
+시스템에 Python 3.x가 설치되어 있는지 확인한 후, 필요한 의존성을 설치합니다:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 设置
+### 설정
 
-1. **GitHub Secrets：**
+1. **GitHub Secrets:**
 
-   在您的 GitHub 仓库中添加以下 Secrets：
+   GitHub 리포지토리에 다음 Secrets를 추가하세요:
 
-   - `OPENAI_API_KEY`: 您的 OpenAI API 密钥。
-   - `PRODUCTHUNT_CLIENT_ID`: 您的 Product Hunt API 客户端 ID。
-   - `PRODUCTHUNT_CLIENT_SECRET`: 您的 Product Hunt API 客户端密钥。
-   - `PAT`: 用于推送更改到仓库的个人访问令牌。
+   - `OPENAI_API_KEY`: OpenAI API 키.
+   - `PRODUCTHUNT_CLIENT_ID`: Product Hunt API 클라이언트 ID.
+   - `PRODUCTHUNT_CLIENT_SECRET`: Product Hunt API 클라이언트 비밀 키.
+   - `PAT`: 리포지토리에 변경 사항을 푸시하기 위한 개인 액세스 토큰.
 
-2. **GitHub Actions 工作流：**
+2. **GitHub Actions 워크플로우:**
 
-   工作流定义在 `.github/workflows/generate_markdown.yml` 中。该工作流每天 UTC 时间 08:01（北京时间 16:01）自动运行，也可以手动触发。
+   워크플로우는 `.github/workflows/generate_markdown.yml`에 정의되어 있습니다. 이 워크플로우는 매일 UTC 시간 08:01(한국 시간 16:01)에 자동으로 실행되며, 수동으로도 트리거할 수 있습니다.
 
-### 使用
+### 사용 방법
 
-设置完成后，GitHub Action 将自动生成并提交包含 Product Hunt 每日热门产品的 Markdown 文件。文件存储在 `data/` 目录下。
+설정이 완료되면 GitHub Action이 Product Hunt 매일 인기 제품이 포함된 Markdown 파일을 자동으로 생성하고 제출합니다. 파일은 `data/` 디렉토리에 저장됩니다.
 
-### 自定义
+### 커스터마이징
 
-- 您可以修改 `scripts/product_hunt_list_to_md.py` 文件来自定义生成文件的格式或添加额外内容。
-- 如果需要，可以在 `.github/workflows/generate_markdown.yml` 中调整定时任务的运行时间。
+- `scripts/product_hunt_list_to_md.py` 파일을 수정하여 생성되는 파일의 형식을 커스터마이징하거나 추가 내용을 포함시킬 수 있습니다.
+- 필요에 따라 `.github/workflows/generate_markdown.yml`에서 예약 작업의 실행 시간을 조정할 수 있습니다.
 
-### 示例输出
+### 예시 출력
 
-生成的文件存储在 `data/` 目录下。每个文件以 `PH-daily-YYYY-MM-DD.md` 的格式命名。
+생성된 파일은 `data/` 디렉토리에 저장됩니다. 각 파일은 `PH-daily-YYYY-MM-DD.md` 형식으로 이름이 지정됩니다.
 
-### 贡献
+### 기여
 
-欢迎任何形式的贡献！如有任何改进或新功能的建议，请提交 issue 或 pull request。
+모든 형태의 기여를 환영합니다! 개선이나 새로운 기능에 대한 제안이 있다면 issue나 pull request를 제출해 주세요.
 
-### 许可证
+### 라이선스
 
-本项目基于 MIT 许可证开源 - 有关详细信息，请参阅 [LICENSE](LICENSE) 文件。
+이 프로젝트는 MIT 라이선스를 기반으로 오픈 소스로 제공됩니다 - 자세한 내용은 [LICENSE](LICENSE) 파일을 참조하세요.
